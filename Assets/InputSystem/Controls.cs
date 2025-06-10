@@ -116,6 +116,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""721743c8-6a5d-42b4-b29e-7501227b9490"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -360,6 +369,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""ScrolHotbar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d16b7826-9d1c-424f-9350-d0fc5d6005b8"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -378,6 +398,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_TakeFromInventory = m_Player.FindAction("TakeFromInventory", throwIfNotFound: true);
         m_Player_ScrolHotbar = m_Player.FindAction("ScrolHotbar", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -449,6 +470,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_TakeFromInventory;
     private readonly InputAction m_Player_ScrolHotbar;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -463,6 +485,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @TakeFromInventory => m_Wrapper.m_Player_TakeFromInventory;
         public InputAction @ScrolHotbar => m_Wrapper.m_Player_ScrolHotbar;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -502,6 +525,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ScrolHotbar.started += instance.OnScrolHotbar;
             @ScrolHotbar.performed += instance.OnScrolHotbar;
             @ScrolHotbar.canceled += instance.OnScrolHotbar;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -536,6 +562,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ScrolHotbar.started -= instance.OnScrolHotbar;
             @ScrolHotbar.performed -= instance.OnScrolHotbar;
             @ScrolHotbar.canceled -= instance.OnScrolHotbar;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -565,5 +594,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnTakeFromInventory(InputAction.CallbackContext context);
         void OnScrolHotbar(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }

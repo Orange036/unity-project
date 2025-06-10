@@ -32,13 +32,13 @@ public class PlayerInteraction : MonoBehaviour
 
     public event EventHandler CurrentPositionChanged;
 
-
-
     private Controls actions;
 
     void Start()
     {
         scrollAction = actions.Player.ScrolHotbar;
+
+        Cursor.lockState = CursorLockMode.Locked;
 
         actions.Player.Throw.performed += ThrowAction;
         actions.Player.PickUp.performed += PickUpAction;
@@ -64,17 +64,6 @@ public class PlayerInteraction : MonoBehaviour
             YaxisRotation += vector2.x * rotationSensitivity;
             heldObj.transform.Rotate(new Vector3(XaxisRotation, YaxisRotation, 0f), Space.Self);
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
         //Gizmo tracking

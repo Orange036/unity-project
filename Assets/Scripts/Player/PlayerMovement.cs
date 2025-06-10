@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -9,10 +10,11 @@ public class PlayerMovement : MonoBehaviour
     private float force = 1000f;
     private float speedCap = 9f;
     private float maxDistanceToGround = 500f;
-    [SerializeField]private float normalDistanceToGround = 50f;
+    [SerializeField]private float normalDistanceToGround = 2f;
     private float sensibility = 10f;
     private float xRotation = 0;
     private float yRotation = 0;
+    [SerializeField]private bool crouch = false;
     [SerializeField]private float springForce = 10f;
 
     [SerializeField] private float kp, ki, kd;
@@ -30,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         controllerPID = new PIDController(kp, ki, kd);
         rb = GetComponent<Rigidbody>();
         actions.Player.Jump.performed += OnJump;
+        actions.Player.Crouch.performed += onCrouch;
     }
 
     void Update()
@@ -89,6 +92,26 @@ public class PlayerMovement : MonoBehaviour
     private void OnJump(InputAction.CallbackContext context)
     {
         rb.AddForce(transform.up * force);
+    }
+
+    private void onCrouch(InputAction.CallbackContext context)
+    {
+        if (!crouch)
+        {
+            transform.localScale = new Vector3(2f, 1f, 2f);
+            crouch = true;
+            speedCap = speedCap / 3;
+            normalDistanceToGround = 1.5f;
+
+        }
+        else
+        {
+            transform.localScale = new Vector3(2f, 2f, 2f);
+            crouch = false;
+            speedCap = speedCap * 3;
+            normalDistanceToGround = 2.5f;
+        }
+
     }
 
     /*private void OnJump(InputAction.CallbackContext contex) 
