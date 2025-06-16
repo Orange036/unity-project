@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Sprint",
                     "type": "Button",
                     "id": "f444151e-a63c-40ee-8e71-43d7caca765b",
                     "expectedControlType": "Button",
@@ -106,17 +106,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "49e50f2a-621d-42c8-beb7-0c12c34d2ef4",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "2c332027-4b36-491b-aff9-4c35f15b907f",
@@ -218,23 +207,12 @@
                 },
                 {
                     "name": "",
-                    "id": "471b1aa2-a654-4aa5-8297-f7a766cc263a",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "39243e7a-7e6b-4817-8112-a20127a0f21f",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
