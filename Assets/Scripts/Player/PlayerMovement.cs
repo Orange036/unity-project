@@ -85,13 +85,16 @@ public class PlayerMovement : MonoBehaviour
 
         if(endurance > 0 && sprint)
         {
-            endurance -= 0.0001;
+            endurance -= 0.01;
         }
-        else
+        else if(sprint)
         {
-            endurance = 1;
             sprint = false;
             speedCap = walkSpeedCap;
+        }
+        else if (endurance < 1)
+        {
+            endurance += 0.01;
         }
     }
 
